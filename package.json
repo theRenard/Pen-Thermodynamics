@@ -4,8 +4,8 @@
   "description": "Boilerplate with just TS and nothing else",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/index.html -p 9000",
-    "build": "parcel build src/index.html --out-dir dist --public-url './'"
+    "start": "parcel src/index.pug -p 9000",
+    "build": "parcel build src/index.pug --out-dir dist --public-url './'"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-clean-easy": "^1.0.2",
     "parcel-plugin-static-files-copy": "^2.5.0",
+    "pug": "^3.0.0",
     "sass": "^1.32.6",
     "typescript": "^4.1.2"
   },

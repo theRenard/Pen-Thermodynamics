@@ -1,0 +1,13 @@
+- var a = 10
+
+#book
+  h1 Enrico Fermi
+  h2 Thermo- <span>dynamics</span>
+
+  .collection_1
+    - for (var x = 0; x <= a; x++)
+      div(class='circle_' + x)
+
+  .collection_2
+    - for (var x = 0; x <= a; x++)
+      div(class='circle_' + x)
