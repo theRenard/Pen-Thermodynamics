@@ -1,0 +1,73 @@
+@import "bourbon"
+
+[class^="circle_"]
+  position: absolute
+  top: -250px
+  width: 1640px
+  height: 1100px
+  background: transparent
+  border-radius: 50%
+  box-sizing: border-box
+
+.collection_1 [class^="circle_"]
+  border: 25px solid rgba(237, 102, 187, 1.0)
+  left: -1675px
+
+.collection_2 [class^="circle_"]
+  border: 25px solid rgba(222, 34, 57, .6)
+  right: -1065px
+
+
+@for $i from 0 through 10
+  .#{'collection_1 .circle_'}#{$i}
+    z-index: 10 - $i
+    @include animation(move_#{$i} 1s linear infinite)
+
+  @include keyframes(move_#{$i})
+    0%
+      @include transform(translate(55px * $i, 0))
+    100%
+      @include transform(translate((55px * $i) + 55px, 0))
+
+@for $i from 0 through 10
+  .#{'collection_2 .circle_'}#{$i}
+    z-index: 20 - $i
+    @include animation(move_#{$i} 1s linear reverse infinite)
+
+
+// style the book cover
+body, html
+  background-color: black
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100%
+
+#book
+  width: 400px
+  height: 600px
+  background-color: rgba(237, 88, 97, 1.0)
+  padding: 10px
+  border: 1px solid white
+  position: relative
+  overflow: hidden
+  box-sizing: border-box
+  h1, h2
+    position: absolute
+    z-index: 100
+    opacity: .7
+    font-family: 'Cherry Swash', cursive
+    color: #000
+    font-align: right
+    text-transform: lowercase
+    right: 1em
+  h1
+    font-size: 2.2em
+    top: 5.5em
+  h2
+    text-align: center
+    font-size: 4em
+    line-height: .8em
+    top: 1em
+    left: 1em
+
