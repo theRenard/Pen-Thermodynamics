@@ -1,13 +1,24 @@
-- var a = 10
+- var a = 36
+- var b = 20
+- var c = 5
 
 #book
-  h1 Enrico Fermi
-  h2 Thermo- <span>dynamics</span>
+  h2 James Collins
+  h1 The <br> Existentialists
 
-  .collection_1
-    - for (var x = 0; x <= a; x++)
-      div(class='circle_' + x)
+  .square
+    .area_1
+      - for (var x = 0; x <= a; x++)
+        div(class='line_' + x)
+          - for (var y = 0; y <= b; y++)
+            div(class='triangle')
 
-  .collection_2
-    - for (var x = 0; x <= a; x++)
-      div(class='circle_' + x)
+    .area_2
+      - for (var x = 1; x <= c; x++)
+        div(class='circle_' + x)
+          - for (var y = 0; y <= a; y++)
+            div(class='small_triangle_' + y)
+
+
+
+

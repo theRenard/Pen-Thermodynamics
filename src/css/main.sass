@@ -1,39 +1,116 @@
-@import "bourbon"
+@import "compass"
 
-[class^="circle_"]
+[class*="triangle"]
+  width: 0
+  height: 0
+  margin-bottom: 4px
+  border-style: solid
+  border-color: transparent transparent #9D9F5D transparent
+
+.triangle
+  border-width: 0 10px 15px 10px
+  @include animation(move .5s linear reverse infinite)
+
+[class^="small_triangle"]
+  border-width: 0 5px 7px 5px
+
+[class*="line_"]
   position: absolute
-  top: -250px
-  width: 1640px
-  height: 1100px
-  background: transparent
-  border-radius: 50%
-  box-sizing: border-box
-
-.collection_1 [class^="circle_"]
-  border: 25px solid rgba(237, 102, 187, 1.0)
-  left: -1675px
-
-.collection_2 [class^="circle_"]
-  border: 25px solid rgba(222, 34, 57, .6)
-  right: -1065px
-
+  width: 20px
+  top: 0
+  left: 0
+  @include transform-origin(center center)
 
 @for $i from 0 through 10
-  .#{'collection_1 .circle_'}#{$i}
-    z-index: 10 - $i
-    @include animation(move_#{$i} 1s linear infinite)
+  .#{'line_'}#{$i}
 
-  @include keyframes(move_#{$i})
+@for $i from 0 through 36
+  .#{'line_'}#{$i}
+    $radius: 260px
+    $angle: 360deg / 36
+    @include transform(rotate($i * -10deg))
+    top: #{$radius + ($radius*cos( ($i) * $angle))}
+    left: #{$radius + ($radius*sin( ($i) * $angle))}
+
+@for $i from 0 through 36
+  .#{'small_triangle_'}#{$i}
+    position: absolute
+    $radius: 71px
+    $angle: 360deg / 36
+    @include transform(rotate($i * -10deg + 180deg))
+    top: #{$radius + ($radius*cos( ($i) * $angle))}
+    left: #{$radius + ($radius*sin( ($i) * $angle))}
+
+[class*='circle_']
+  position: absolute
+  width: 150px
+  height: 150px
+
+$scales_from: 1, .8, .6, .4, .2
+$scales_to: 1.2, 1, .8, .6, .4
+
+@each $from in $scales_from
+  $i: index($scales_from, $from)
+  $to: nth($scales_to, $i)
+  @include keyframes(scale_#{$i})
     0%
-      @include transform(translate(55px * $i, 0))
+      @include transform(scale($from))
     100%
-      @include transform(translate((55px * $i) + 55px, 0))
+      @include transform(scale($to))
 
-@for $i from 0 through 10
-  .#{'collection_2 .circle_'}#{$i}
-    z-index: 20 - $i
-    @include animation(move_#{$i} 1s linear reverse infinite)
+@include keyframes(visibility)
+  0%
+    opacity: 0
+  100%
+    opacity: 1
 
+@for $i from 1 through 5
+  .#{'circle_'}#{$i}
+    @include transform-origin(center center)
+    @if $i == 1
+      @include animation(scale_#{$i} .5s linear  infinite, visibility .5s linear reverse infinite)
+    @else if $i == 5
+      @include animation(scale_#{$i} .5s linear  infinite, visibility .5s linear infinite)
+    @else
+      @include animation(scale_#{$i} .5s linear  infinite)
+
+
+.area_1,
+.area_2
+  position: absolute
+  top: -350px
+  left: -40px
+  z-index: 3
+
+.area_2
+  background: #3F2343
+  width: 150px
+  height: 150px
+  z-index: 4
+  top: 34px
+  left: 155px
+  border-radius: 50%
+  overflow: hidden
+
+.square
+  background: #2C7A48
+  height: 300px
+  padding: 10px
+  position: absolute
+  z-index: 2
+  bottom: 10px
+  right: 10px
+  left: 10px
+  display: flex
+  align-items: center
+  justify-content: center
+  overflow: hidden
+
+@include keyframes(move)
+  0%
+    @include transform(translate(0px,0px))
+  100%
+    @include transform(translate(0px,19px))
 
 // style the book cover
 body, html
@@ -46,28 +123,34 @@ body, html
 #book
   width: 400px
   height: 600px
-  background-color: rgba(237, 88, 97, 1.0)
+  background-color: white
   padding: 10px
   border: 1px solid white
   position: relative
   overflow: hidden
   box-sizing: border-box
-  h1, h2
-    position: absolute
-    z-index: 100
-    opacity: .7
-    font-family: 'Cherry Swash', cursive
-    color: #000
-    font-align: right
-    text-transform: lowercase
-    right: 1em
+  h1, h2, h3
+    color: #3F2343
+    margin: .2rem 0
+    font-weight: normal
+    font-family: 'Helvetica'
+    font-size: 2em
   h1
-    font-size: 2.2em
-    top: 5.5em
+    font-family: 'Oswald', sans-serif
+    font-family: 'Fjalla One', sans-serif
+    float: right
+    font-weight: 700
+    line-height: 1em
+    font-size: 2.8em
+    text-align: right
+    @include transform(translateY(50px) translatex(0px) scale(1 ,2))
+    text-shadow: 0 0 0 black
   h2
-    text-align: center
-    font-size: 4em
-    line-height: .8em
-    top: 1em
-    left: 1em
+    text-align: right
+    font-size: 1.5em
+    padding: 10px 0
+    text-transform: uppercase
+    border-bottom: 1px solid #2C7A48
+
+
 
